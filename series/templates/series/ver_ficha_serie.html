@@ -1,0 +1,16 @@
+{% extends "series/base.html" %}
+{%block title %}{{ obj.titulo }}{% endblock %}
+
+{% block contenido %}
+
+	<h1>{{ obj.titulo }} </h1>
+	<p>{{ obj.plot }}</p>
+	<img style="width: 300px" src="{{ obj.min_cover }}" />
+
+	<ul>
+	{% for t in oTemporadas %}
+		<li><a href="{% url series_ver_listado_episodios obj.slug, t %}">Temporada {{ t }}</a></li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}

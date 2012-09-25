@@ -1,0 +1,12 @@
+{{ oSeries.count }}
+<br><br><br>
+
+{% for s in oSeries %}
+	{{ s.titulo|upper }} ({{ s.rating }})<hr>
+	<ul>
+		{% for e in oEpisodios %}
+			<li>{{ e }}</li>
+		{% endfor %}
+	</ul>
+{% endfor %}
+

@@ -1,0 +1,9 @@
+{% extends "series/base.html" %}
+
+{% block contenido %}
+	<form action="." method="POST">
+		{% csrf_token %}
+		<table>{{ form }}</table>
+		<input type="submit" />
+	</form>
+{% endblock %}

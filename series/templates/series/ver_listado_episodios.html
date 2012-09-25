@@ -1,0 +1,15 @@
+{% extends "series/base.html" %}
+	{% block title %}{{ oSerie.titulo }}{% endblock %}
+
+	{% block contenido %}
+		<h1>{{ oSerie.titulo }}</h1>
+		<h3>TEMPORADA {{ temporada }}</h3>
+		<img src="{{ oSerie.min_cover }}" />
+		<hr>
+		<ul>
+		{% for ep in oEpisodios %}
+			<li><a href="{% url series_ver_ficha_episodio oSerie.slug, temporada, ep.numero %}">{{ ep }}</a></li>
+		{% endfor %}
+		</ul>
+
+	{% endblock %}

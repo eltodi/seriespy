@@ -1,0 +1,9 @@
+{% extends "series/base.html" %}
+	{% block contenido %}
+
+		<h1>SeriesPY</h1>
+		<ul>
+		{% for s in oSeries %}
+			<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s }}</a></li>
+		{% endfor %}
+	{% endblock %}

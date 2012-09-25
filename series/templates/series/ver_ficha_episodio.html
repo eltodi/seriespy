@@ -1,0 +1,8 @@
+{% extends "series/base.html" %}
+	{% block title %}{{ oSerie.titulo }}:{{ oEpisodio.titulo }}{% endblock %}
+
+{% block contenido %}
+	<h1>{{ oEpisodio.titulo }}</h1>
+	<p><img style="float:left; padding-right: 10px" src="{{ oSerie.min_cover }}" />{{ oSerie.plot }}</p>
+	<p><a href="{{ oEpisodio.url_magnet }}">{{ oEpisodio.titulo_raw }}</a> </p>
+{% endblock %}
