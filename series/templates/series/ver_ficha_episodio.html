@@ -1,10 +1,34 @@
 {% extends "base.html" %}
-	{% block header %}
-		{{ oSerie.titulo }}:{{ oEpisodio.titulo }}
-	{% endblock %}
+
+{% block title %}
+	{{ oSerie.titulo }}:{{ oEpisodio.titulo }}
+{% endblock %}
+
+{% block header %}
+	<h1>{{ oSerie.titulo }}<small><br>{{ oEpisodio.numero }}.- {{ oEpisodio.titulo }}</small>
+{% endblock %}
+
+{% block guia_paginas %}
+	<ul class="breadcrumb">
+		<li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
+		<li><a href="{% url series_ver_ficha_serie oSerie.slug %}">{{ oSerie.slug }}</a> <span class="divider">/</span></li>
+		<li><a href="{% url series_ver_listado_episodios oSerie.slug oEpisodio.temporada %}">Temporada {{ oEpisodio.temporada }}</a></li><span class="divider">/</span></li>
+		<li class="active">{{ oEpisodio.titulo }}</li>
+	</ul>
+{% endblock %}
 
 {% block contenido %}
-	<h1>{{ oEpisodio.titulo }}</h1>
-	<p><img style="float:left; padding-right: 10px" src="{{ oSerie.min_cover }}" />{{ oSerie.plot }}</p>
-	<p><a href="{{ oEpisodio.url_magnet }}">{{ oEpisodio.titulo_raw }}</a> </p>
+	<div class="row">
+		<div class="span3">
+			<img style="width: 100%" src="{% url series_portada oSerie.slug %}" />
+		</div>
+		<div class="span8">
+			<h3>{{oEpisodio.numero }}.- {{ oEpisodio.titulo }} <span class="pull-right"><small>RATING: {{ oSerie.rating }}</small></span></h3>
+			<p>{{ oSerie.plot }}</p>
+			<p><a href="{{ oEpisodio.url_magnet }}">
+				<span class="btn btn-success"><i class="icon-download-alt icon-white"></i> {{ oEpisodio.titulo_raw }}</span>
+				</a>
+			</p>
+
+		</div>
 {% endblock %}

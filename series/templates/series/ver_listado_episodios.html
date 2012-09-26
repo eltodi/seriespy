@@ -1,16 +1,29 @@
 {% extends "base.html" %}
 
 	{% block title %}{{ oSerie.titulo }}{% endblock %}
-
-	{% block contenido %}
-		<h1>{{ oSerie.titulo }}</h1>
-		<h3>TEMPORADA {{ temporada }}</h3>
-		<img src="{{ oSerie.min_cover }}" />
-		<hr>
-		<ul>
-		{% for ep in oEpisodios %}
-			<li><a href="{% url series_ver_ficha_episodio oSerie.slug, temporada, ep.numero %}">{{ ep }}</a></li>
-		{% endfor %}
+	{% block header %}
+		<h1>{{ oSerie.titulo }}<br>
+		<small>TEMPORADA {{ temporada }}</small></h1>
+	{% endblock %}
+	{% block guia_paginas %}
+		<ul class="breadcrumb">
+			<li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
+			<li><a href="{% url series_ver_ficha_serie oSerie.slug %}">{{ oSerie.slug }}</a> <span class="divider">/</span></li>
+			<li class="active">Temporada {{ temporada }}</li>
 		</ul>
-
+	{% endblock %}
+	{% block contenido %}
+		<div class="row">
+			<div class="span3">
+				<img style="width: 100%" src="{% url series_portada oSerie.slug %}" />
+			</div>
+			<div class="span8">
+				<h3>LISTADO DE EPISODIOS</h3>
+				<ul class="unstyled">
+				{% for ep in oEpisodios %}
+					<li><a href="{% url series_ver_ficha_episodio oSerie.slug, temporada, ep.numero %}">{{ ep|upper }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
 	{% endblock %}

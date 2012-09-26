@@ -34,6 +34,7 @@ def ver_ficha_serie(request, slug_serie):
 	return {"obj": serie, "oTemporadas": temporadas}
 
 
+@render_with("series/ver_listado_episodios.html")
 def ver_listado_episodios(request, slug_serie, temporada):
 	serie = get_object_or_404(Serie, slug=slug_serie)
 	episodios = serie.episodio_set.filter(temporada = temporada)
@@ -43,9 +44,9 @@ def ver_listado_episodios(request, slug_serie, temporada):
 		"temporada" : temporada,
 		"oEpisodios" : episodios,
 	})
-	return render_to_response("series/ver_listado_episodios.html", c)
+	return c
 
-
+@render_with("series/ver_ficha_episodio.html")
 def ver_ficha_episodio(request, slug_serie, temporada, num_episodio):
 	serie = get_object_or_404(Serie, slug=slug_serie)
 	episodio = serie.episodio_set.filter(temporada = temporada, numero = num_episodio)[0]
@@ -55,7 +56,7 @@ def ver_ficha_episodio(request, slug_serie, temporada, num_episodio):
 		"oEpisodio" : episodio,
 	})
 
-	return render_to_response("series/ver_ficha_episodio.html", c)
+	return c
 
 
 @login_required
