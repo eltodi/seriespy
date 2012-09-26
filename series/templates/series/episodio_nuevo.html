@@ -1,9 +1,14 @@
-{% extends "series/base.html" %}
+{% extends "base.html" %}
+{% block header %}<h1>Nuevo Episodio</h1>{% endblock %}
 
 {% block contenido %}
-	<form action="." method="POST">
+{% load crispy_forms_tags %}
+
+	<form action="." method="POST" class="form form-horizontal">
 		{% csrf_token %}
-		<table>{{ form }}</table>
-		<input type="submit" />
+		{{ form|crispy }}
+		<div class="form-actions">
+			<input class="btn btn-primary" type="submit" />
+		</div>
 	</form>
 {% endblock %}

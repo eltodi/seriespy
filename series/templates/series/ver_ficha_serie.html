@@ -1,11 +1,11 @@
-{% extends "series/base.html" %}
-{%block title %}{{ obj.titulo }}{% endblock %}
+{% extends "base.html" %}
+
+{%block header %}<h1>{{ obj.titulo }}</h1>{% endblock %}
 
 {% block contenido %}
 
-	<h1>{{ obj.titulo }} </h1>
 	<p>{{ obj.plot }}</p>
-	<img style="width: 300px" src="{{ obj.min_cover }}" />
+	<img style="width: 300px" src="{% url series_portada obj.slug %}" />
 
 	<ul>
 	{% for t in oTemporadas %}

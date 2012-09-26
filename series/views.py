@@ -8,6 +8,8 @@ from django.template import Context, RequestContext
 from series.models import *
 from series.forms import *
 from utils import slugify
+from utils.decorators import render_with
+import requests
 
 def pruebas(request):
 	oSeries = Serie.objects.all().order_by("-rating")[:50]
@@ -17,24 +19,20 @@ def pruebas(request):
 	})
 	return render_to_response("series/pruebas.html", c)
 
-def home(request):
-	oSeries = Serie.objects.all().order_by("?")[:40]
-	c = Context({
-		"oSeries" : oSeries,
-	})
-	return render_to_response("series/home.html", c)
 
+@render_with("series/home.html")
+def home(request):
+	oSeries = Serie.objects.all().order_by("?")[:60]
+
+	return {"oSeries":oSeries}
+
+@render_with("series/ver_ficha_serie.html")
 def ver_ficha_serie(request, slug_serie):
 	serie = get_object_or_404(Serie, slug=slug_serie)
 	temporadas = serie.episodio_set.values_list("temporada", flat=True).order_by("temporada").distinct()
 
+	return {"obj": serie, "oTemporadas": temporadas}
 
-	c = Context({
-		"obj" : serie,
-		"oTemporadas" : temporadas,
-	})
-
-	return render_to_response("series/ver_ficha_serie.html", c)
 
 def ver_listado_episodios(request, slug_serie, temporada):
 	serie = get_object_or_404(Serie, slug=slug_serie)
@@ -59,6 +57,7 @@ def ver_ficha_episodio(request, slug_serie, temporada, num_episodio):
 
 	return render_to_response("series/ver_ficha_episodio.html", c)
 
+
 @login_required
 def serie_nueva(request):
 	if request.method == "POST":
@@ -75,7 +74,7 @@ def serie_nueva(request):
 			return HttpResponseRedirect(reverse("series_home"))		# reverse es para ir al name del url.py
 		'''
 		# UTILIZANDO formulario generado desde el modelo
-		form = SerieForm2(request.POST)
+		form = SerieForm3(request.POST)
 		if form.is_valid():
 			nueva_serie = form.save(commit = False)
 			nueva_serie.slug = slugify.slugify(nueva_serie.titulo)
@@ -84,9 +83,15 @@ def serie_nueva(request):
 			return HttpResponseRedirect(reverse("series_home"))
 
 	else:
-		form = SerieForm2()
+		form = SerieForm3()
 
 	return render_to_response("series/serie_nueva.html", {"form": form,}, context_instance=RequestContext(request))
+
+
+def portada(request, slug_serie):
+	serie = Serie.objects.get(slug = slug_serie)
+	r = requests.get(serie.min_cover)
+	return HttpResponse(r.content, content_type = "image/jpg")
 
 
 def episodio_nuevo(request, slug_serie):	#ATENCION:::: RECIBE DOS VARIABLES, UNA DE LA URL.PY
@@ -106,10 +111,4 @@ def episodio_nuevo(request, slug_serie):	#ATENCION:::: RECIBE DOS VARIABLES, UNA
 		form = EpisodioForm()
 
 	return render_to_response("series/episodio_nuevo.html", {"form": form}, context_instance=RequestContext(request))
-
-
-
-
-
-
 

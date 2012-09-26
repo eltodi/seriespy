@@ -1,9 +1,42 @@
-{% extends "series/base.html" %}
+{% extends "base.html" %}
+	{% block header %}
+		<h1>SeriesPY</h1>
+	{% endblock %}
+
 	{% block contenido %}
 
-		<h1>SeriesPY</h1>
-		<ul>
-		{% for s in oSeries %}
-			<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s }}</a></li>
-		{% endfor %}
+		<div class="row">
+			<div class="span4 nonstyled">
+				{% for s in oSeries|slice:":20" %}
+					<ul class="unstyled">
+						<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s|upper }}</a></li>
+					</ul>
+				{% endfor %}
+			</div>
+
+			<div class="span4 nonstyled">
+				{% for s in oSeries|slice:"20:40" %}
+					<ul class="unstyled">
+						<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s|upper }}</a></li>
+					</ul>
+				{% endfor %}
+			</div>
+
+			<div class="span4 nonstyled">
+				{% for s in oSeries|slice:"40:" %}
+					<ul class="unstyled">
+						<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s|upper }}</a></li>
+					</ul>
+				{% endfor %}
+			</div>
+		</div>
+
 	{% endblock %}
+
+	{% block footer %}{% endblock %}
+
+	<script type="text/javascript">
+		$(document).on("ready",function(){
+			alert("listo");
+		})
+	</script>

@@ -1,12 +1,22 @@
-{% extends "series/base.html" %}
+{% extends "base.html" %}
+
+{% block header %}<h1>Nueva Serie</h1>{% endblock %}
 
 {% block contenido %}
-	<form action="." method="post">
+{% load crispy_forms_tags %}
+
+<!--
+	UTILZANDO FORMULARIO CON CRISPY SOLO, SIN MODIFICAR...
+
+
+	<form action="." method="post" class="form form-horizontal">
 		{% csrf_token %}
-		<table>
-		{{ form }}
-		</table>
+		{{ form|crispy }}
 		<input type="submit" />
 	</form>
-
+-->
+<!--
+	UTILIZANDO FORMULARIOS CON CRISPY HELPER
+-->
+		{% crispy form %}
 {% endblock %}

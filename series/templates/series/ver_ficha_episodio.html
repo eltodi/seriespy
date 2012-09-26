@@ -1,5 +1,7 @@
-{% extends "series/base.html" %}
-	{% block title %}{{ oSerie.titulo }}:{{ oEpisodio.titulo }}{% endblock %}
+{% extends "base.html" %}
+	{% block header %}
+		{{ oSerie.titulo }}:{{ oEpisodio.titulo }}
+	{% endblock %}
 
 {% block contenido %}
 	<h1>{{ oEpisodio.titulo }}</h1>

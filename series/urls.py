@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^nueva/','series.views.serie_nueva', name='series_serie_nueva'),
 
     #url(r'^nuevo/episodio/', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
+    url(r'^(?P<slug_serie>[^/]+)/portada/$', 'series.views.portada', name='series_portada'),
 
     url(r'^(?P<slug_serie>[^/]+)/nuevo/$', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
 	url(r'^(?P<slug_serie>[^/]+)/$', 'series.views.ver_ficha_serie', name='series_ver_ficha_serie'),

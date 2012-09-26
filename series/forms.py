@@ -1,4 +1,7 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
+from crispy_forms.bootstrap import FormActions
 from series.models import *
 
 
@@ -32,7 +35,48 @@ class SerieForm2(forms.ModelForm):
 		# exlude es para decir que campos queremos que no aparezcan en  formulario
 
 
+class SerieForm3(forms.ModelForm):
+    class Meta:
+        model = Serie
+        exclude = ['slug', 'genero', 'imdb_id', 'min_cover', 'mini_plot']
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Fieldset(
+                'Obligatorio',
+                "titulo",
+                "rating"
+            ),
+            Fieldset(
+                u'Produccion',
+                "director",
+                "productora",
+                "estado",
+                "year"
+            ),
+            Fieldset(
+                'Cartel',
+                "cover",
+                "plot"
+            ),
+            FormActions(
+                Submit('submit', 'Guardar', css_class='btn btn-success')
+            )
+        )
+        super(SerieForm3, self).__init__(*args, **kwargs)
+
+
 class EpisodioForm(forms.ModelForm):
 	class Meta:
 		model = Episodio
 		exclude = ["serie"]
+
+
+
+
+
+
+
+
