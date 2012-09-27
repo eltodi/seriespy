@@ -16,7 +16,7 @@
 				<ul class="unstyled">
 					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
 						{{ s|upper }}
-					</a></li>
+					</a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
 				</ul>
 				{% endfor %}
 			</div>
@@ -26,7 +26,7 @@
 				<ul class="unstyled">
 					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
 						{{ s|upper }}
-					</a></li>
+					</a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
 				</ul>
 			{% endfor %}
 			</div>
@@ -36,7 +36,7 @@
 				<ul class="unstyled">
 					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
 						{{ s|upper }}
-					</a></li>
+					</a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
 				</ul>
 			{% endfor %}
 			</div>

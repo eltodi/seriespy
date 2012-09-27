@@ -1,5 +1,5 @@
 from django.contrib import admin
-from series.models import PerfilUsuario, Genero, Serie, Episodio, EpisodioUsuario, UsuarioSerie, RegistroImportacion
+from series.models import PerfilUsuario, Genero, Serie, Episodio, EpisodioUsuario, UsuarioSerie, RegistroImportacion, Mensaje
 
 class SerieAdmin(admin.ModelAdmin):
     list_filter = ('genero', 'year')
@@ -18,3 +18,5 @@ admin.site.register(Episodio, EpisodioAdmin)
 admin.site.register(EpisodioUsuario)
 admin.site.register(UsuarioSerie)
 admin.site.register(RegistroImportacion)
+
+admin.site.register(Mensaje)

@@ -1,5 +1,6 @@
 # Create your views here.
-
+import datetime
+from django.db.models import Count
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
@@ -8,8 +9,10 @@ from django.template import Context, RequestContext
 from series.models import *
 from series.forms import *
 from utils import slugify
-from utils.decorators import render_with
+from utils.decorators import render_with, ajax_request
 import requests
+from django.views.decorators.csrf import csrf_exempt
+import pytz
 
 
 def pruebas(request):
@@ -32,10 +35,11 @@ def search(request):
 	if request.method=="GET":
 		oSeries = Serie.objects.filter(titulo__icontains=request.GET["titulo"])
 		if oSeries.count()<1:
-			raise Http404
+			#raise Http404
+			return HttpResponseRedirect(reverse("series_home"))
 		return {"oSeries":oSeries}
 	else:
-		raise Http404
+		return HttpResponseRedirect(reverse("series_home"))
 
 
 @render_with("series/ver_ficha_serie.html")
@@ -124,4 +128,47 @@ def episodio_nuevo(request, slug_serie):	#ATENCION:::: RECIBE DOS VARIABLES, UNA
 		form = EpisodioForm()
 
 	return render_to_response("series/episodio_nuevo.html", {"form": form}, context_instance=RequestContext(request))
+
+
+@login_required
+@csrf_exempt
+@ajax_request
+def episodios_descargados_ajax(request):
+    episodios_u = EpisodioUsuario.objects.filter(user=request.user)
+    now = datetime.datetime.now(tz=pytz.UTC)
+
+    result = []
+    for eu in episodios_u:
+        if eu.fecha_descarga is not None and abs((now - eu.fecha_descarga).total_seconds()) < 10:
+            result.append(
+                (eu.episodio.serie.titulo,
+                 eu.episodio.numeracion_normalizada(),
+                 eu.episodio.titulo))
+    return result
+
+
+@login_required
+def notificaciones_cambiar(request, value=False):
+	try:
+		perfil = request.user.get_profile()
+	except PerfilUsuario.DoesNotExist:
+		perfil = PerfilUsuario()
+		perfil.user = request.user
+		perfil.save()
+	perfil.notificaciones_activas = value
+	perfil.save()
+
+	#raise Http404
+	return HttpResponseRedirect(request.META.get("HTTP_REFERER", reverse("series_home")))
+
+
+
+
+
+
+
+
+
+
+
 

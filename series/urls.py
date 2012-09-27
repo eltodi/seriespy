@@ -16,6 +16,12 @@ urlpatterns = patterns('',
     url(r'^pruebas/$', 'series.views.pruebas'),
     url(r'^nueva/','series.views.serie_nueva', name='series_serie_nueva'),
 
+    url(r'^notificaciones/descargas/$', 'series.views.episodios_descargados_ajax', name='series_episodios_descargados_ajax'),
+
+    url(r'^notificaciones/activar/$','series.views.notificaciones_cambiar', {'value':True}, name='series_notificaciones_activar'),
+    url(r'^notificaciones/desactivar/$','series.views.notificaciones_cambiar', {'value':False}, name='series_notificaciones_desactivar'),
+
+
     #url(r'^nuevo/episodio/', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
     url(r'^(?P<slug_serie>[^/]+)/portada/$', 'series.views.portada', name='series_portada'),
     url(r'^search/$', 'series.views.search', name='series_search'),

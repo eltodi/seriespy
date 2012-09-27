@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}series/css/style.css">
-
 </head>
 
 <body>
@@ -21,6 +20,25 @@
                     <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
+                <ul class="nav">
+                  {% if request.user.is_authenticated %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi Cuenta <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {% if request.user.get_profile.notificaciones_activas %}
+                            <li><a href="{% url series_notificaciones_desactivar %}">Desactivar notificaciones</a></li>
+                            {% else %}
+                            <li><a href="{% url series_notificaciones_activar %}">Activar notificaciones</a></li>
+                            {% endif %}
+                            <li class="divider"></li>
+                            <li><a href="{% url auth_logout %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url auth_login %}?next=/">Login</a></li>
+                    {% endif %}
+                </ul>
+
                 <form action="{% url series_search %}" class="navbar-search pull-right" method="get">
                         Buscar Serie: <input name="titulo" onchange="this.submit()" type="text" class="search-query" placeholder="Escriba título">
                 </form>
@@ -28,19 +46,38 @@
         </div>
     </div>
 
-    <div class="header">
+    <div id="header" class="header">
     {% block header %}{% endblock %}
     </div>
-    <div class="guia_paginas">
+    <div id="guia_paginas" class="guia_paginas">
     {% block guia_paginas %}{% endblock %}
     </div>
-    <div class="container">
+    <div id="contenedor" class="container">
     {% block contenido %}{% endblock %}
     </div>
-    <div class="">
-    {% block footer %}{% endblock %}
+    <div id="footer" class="">
+        {% block footer %}{% endblock %}
+    </div>
 
+    <div id="cpmodal" class="modal hide fade in">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
 
-<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}/bootstrap/js/jquery.bootstrap-growl.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}series/js/funciones.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}series/js/notificar_descarga.js"></script>
+{% if request.user.is_authenticated and request.user.get_profile.notificaciones_activas %}
+    <script type="text/javascript">
+        var url_notificar_descarga_episodios = "{% url series_episodios_descargados_ajax %}";
+    </script>
+{% endif %}
+{% block extra_js %}{% endblock %}
 </body>
 </html>

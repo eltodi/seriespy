@@ -19,21 +19,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('series', ['PerfilUsuario'])
 
-        # Adding model 'Genero'
-        db.create_table('series_genero', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=255)),
-        ))
-        db.send_create_signal('series', ['Genero'])
-
         # Adding model 'Serie'
         db.create_table('series_serie', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('titulo', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
             ('productora', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('genero', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('director', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('estado', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('en_emision', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('year', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
             ('imdb_id', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('cover', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
@@ -44,23 +38,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('series', ['Serie'])
 
-        # Adding M2M table for field genero on 'Serie'
-        db.create_table('series_serie_genero', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('serie', models.ForeignKey(orm['series.serie'], null=False)),
-            ('genero', models.ForeignKey(orm['series.genero'], null=False))
-        ))
-        db.create_unique('series_serie_genero', ['serie_id', 'genero_id'])
-
         # Adding model 'Episodio'
         db.create_table('series_episodio', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('serie', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['series.Serie'])),
             ('titulo', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('titulo_raw', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('temporada', self.gf('django.db.models.fields.IntegerField')()),
             ('numero', self.gf('django.db.models.fields.IntegerField')()),
             ('url_magnet', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('subtitulos', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
         ))
         db.send_create_signal('series', ['Episodio'])
 
@@ -97,14 +83,8 @@ class Migration(SchemaMigration):
         # Deleting model 'PerfilUsuario'
         db.delete_table('series_perfilusuario')
 
-        # Deleting model 'Genero'
-        db.delete_table('series_genero')
-
         # Deleting model 'Serie'
         db.delete_table('series_serie')
-
-        # Removing M2M table for field genero on 'Serie'
-        db.delete_table('series_serie_genero')
 
         # Deleting model 'Episodio'
         db.delete_table('series_episodio')
@@ -161,9 +141,9 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'numero': ('django.db.models.fields.IntegerField', [], {}),
             'serie': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['series.Serie']"}),
+            'subtitulos': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             'temporada': ('django.db.models.fields.IntegerField', [], {}),
             'titulo': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'titulo_raw': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'url_magnet': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         },
         'series.episodiousuario': {
@@ -174,11 +154,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'rating': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '1'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
-        },
-        'series.genero': {
-            'Meta': {'object_name': 'Genero'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
         'series.perfilusuario': {
             'Meta': {'object_name': 'PerfilUsuario'},
@@ -198,8 +173,8 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Serie'},
             'cover': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'director': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'estado': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'genero': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['series.Genero']", 'null': 'True', 'blank': 'True'}),
+            'en_emision': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'genero': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'imdb_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'min_cover': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),

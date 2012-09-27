@@ -9,6 +9,7 @@ class PerfilUsuario(models.Model):
     transmission_port = models.IntegerField(default=9091)
     transmission_user = models.CharField(max_length=255, blank=True, null=True)
     transmission_password = models.CharField(max_length=255, blank=True, null=True)
+    notificaciones_activas = models.BooleanField(default=False)
 
 class Genero(models.Model):
     nombre = models.CharField(max_length=255)
@@ -55,6 +56,10 @@ class EpisodioUsuario(models.Model):
     rating = models.DecimalField(max_digits=10, decimal_places=1)
     fecha_visto = models.DateTimeField(null=True, blank=True)
     fecha_descarga = models.DateTimeField(null=True, blank=True)
+    notificar_descarga = models.BooleanField(default = False)
+
+    def __unicode__(self):
+        return "%s: %s (%s)" % (self.user, self.episodio.serie, self.episodio.numeracion_normalizada())
 
 TIPOSEGUIMIENTO = (
     ('seguir','Seguir'),
@@ -74,3 +79,15 @@ class RegistroImportacion(models.Model):
     @classmethod
     def get_latest(cls):
         return cls.objects.all().order_by("-cuando")[0]
+
+
+class Mensaje(models.Model):
+    remitente = models.ForeignKey(User, related_name="remitente_mensaje_set")
+    destinatario = models.ForeignKey(User, related_name="destinatario_mensaje_set")
+    fecha = models.DateTimeField()
+    visto = models.DateTimeField()
+    texto = models.DateTimeField()
+
+    def __unicode__(self):
+        return "mensaje de %s " % (self.remitente)
+

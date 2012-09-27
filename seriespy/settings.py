@@ -168,3 +168,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_PROFILE_MODULE = 'series.PerfilUsuario'
