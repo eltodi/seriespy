@@ -5,6 +5,13 @@ from crispy_forms.bootstrap import FormActions
 from series.models import *
 
 
+class BuscaSerieForm(forms.Form):
+    titulo = forms.CharField(max_length = 50)
+
+    def clen(self):
+        return self.cleaned_data
+
+
 class SerieForm(forms.Form):
 	titulo = forms.CharField(max_length = 38)
 	temporadas = forms.IntegerField()

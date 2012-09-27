@@ -11,6 +11,7 @@ from utils import slugify
 from utils.decorators import render_with
 import requests
 
+
 def pruebas(request):
 	oSeries = Serie.objects.all().order_by("-rating")[:50]
 
@@ -23,8 +24,19 @@ def pruebas(request):
 @render_with("series/home.html")
 def home(request):
 	oSeries = Serie.objects.all().order_by("?")[:60]
-
 	return {"oSeries":oSeries}
+
+
+@render_with("series/home.html")
+def search(request):
+	if request.method=="GET":
+		oSeries = Serie.objects.filter(titulo__icontains=request.GET["titulo"])
+		if oSeries.count()<1:
+			raise Http404
+		return {"oSeries":oSeries}
+	else:
+		raise Http404
+
 
 @render_with("series/ver_ficha_serie.html")
 def ver_ficha_serie(request, slug_serie):
@@ -46,6 +58,7 @@ def ver_listado_episodios(request, slug_serie, temporada):
 	})
 	return c
 
+
 @render_with("series/ver_ficha_episodio.html")
 def ver_ficha_episodio(request, slug_serie, temporada, num_episodio):
 	serie = get_object_or_404(Serie, slug=slug_serie)
@@ -55,7 +68,6 @@ def ver_ficha_episodio(request, slug_serie, temporada, num_episodio):
 		"oSerie" : serie,
 		"oEpisodio" : episodio,
 	})
-
 	return c
 
 
@@ -72,7 +84,7 @@ def serie_nueva(request):
 			serie.rating =  5.0
 			serie.save()
 
-			return HttpResponseRedirect(reverse("series_home"))		# reverse es para ir al name del url.py
+			return HttpResponseRedirect(reverse("series_home"))	# reverse es para ir al name del url.py
 		'''
 		# UTILIZANDO formulario generado desde el modelo
 		form = SerieForm3(request.POST)

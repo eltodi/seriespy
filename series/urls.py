@@ -18,11 +18,11 @@ urlpatterns = patterns('',
 
     #url(r'^nuevo/episodio/', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
     url(r'^(?P<slug_serie>[^/]+)/portada/$', 'series.views.portada', name='series_portada'),
-
+    url(r'^search/$', 'series.views.search', name='series_search'),
     url(r'^(?P<slug_serie>[^/]+)/nuevo/$', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
-	url(r'^(?P<slug_serie>[^/]+)/$', 'series.views.ver_ficha_serie', name='series_ver_ficha_serie'),
+    url(r'^(?P<slug_serie>[^/]+)/$', 'series.views.ver_ficha_serie', name='series_ver_ficha_serie'),
     url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/$', 'series.views.ver_listado_episodios', name='series_ver_listado_episodios'),
-	url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/(?P<num_episodio>\d+)/$', 'series.views.ver_ficha_episodio', name='series_ver_ficha_episodio'),
+    url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/(?P<num_episodio>\d+)/$', 'series.views.ver_ficha_episodio', name='series_ver_ficha_episodio'),
     # Examples:
     # url(r'^$', 'seriespy.views.home', name='home'),
     # url(r'^seriespy/', include('seriespy.foo.urls')),

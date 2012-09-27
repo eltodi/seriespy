@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>{% block title %}{{ titulo_pagina }} {% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.min.css">
+    <title>{% block title %}{{ titulo_pagina }} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}series/css/style.css">
 
 </head>
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">SeriesPY</a>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">SeriesPY</a>
 
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <form class="navbar-form pull-right">
-          <input id="username" class="span2" type="text" placeholder="username">
-          <input id="password" class="span2" type="password" placeholder="password">
-          <button class="btn btn-info" type="submit" class="btn">Sign in</button>
-        </form>
-      </div>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <form action="{% url series_search %}" class="navbar-search pull-right" method="get">
+                        Buscar Serie: <input name="titulo" onchange="this.submit()" type="text" class="search-query" placeholder="Escriba título">
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<div class="header">
-	{% block header %}{% endblock %}
-</div>
-<div class="guia_paginas">
+    <div class="header">
+    {% block header %}{% endblock %}
+    </div>
+    <div class="guia_paginas">
     {% block guia_paginas %}{% endblock %}
-</div>
-<div class="container">
-	{% block contenido %}{% endblock %}
-</div>
-<div class="">
+    </div>
+    <div class="container">
+    {% block contenido %}{% endblock %}
+    </div>
+    <div class="">
     {% block footer %}{% endblock %}
 
 
-	<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
 </body>
 </html>

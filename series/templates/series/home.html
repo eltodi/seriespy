@@ -3,40 +3,51 @@
 		<h1>SeriesPY</h1>
 	{% endblock %}
 
-	{% block contenido %}
+	{% block guia_paginas %}
+		<ul class="breadcrumb">
+		<li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
+		</ul>
+	{% endblock %}
 
+	{% block contenido %}
 		<div class="row">
 			<div class="span4 nonstyled">
 				{% for s in oSeries|slice:":20" %}
-					<ul class="unstyled">
-						<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s|upper }}</a></li>
-					</ul>
+				<ul class="unstyled">
+					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
+						{{ s|upper }}
+					</a></li>
+				</ul>
 				{% endfor %}
 			</div>
 
 			<div class="span4 nonstyled">
-				{% for s in oSeries|slice:"20:40" %}
-					<ul class="unstyled">
-						<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s|upper }}</a></li>
-					</ul>
-				{% endfor %}
+			{% for s in oSeries|slice:"20:40" %}
+				<ul class="unstyled">
+					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
+						{{ s|upper }}
+					</a></li>
+				</ul>
+			{% endfor %}
 			</div>
 
 			<div class="span4 nonstyled">
-				{% for s in oSeries|slice:"40:" %}
-					<ul class="unstyled">
-						<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">{{ s|upper }}</a></li>
-					</ul>
-				{% endfor %}
+			{% for s in oSeries|slice:"40:" %}
+				<ul class="unstyled">
+					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
+						{{ s|upper }}
+					</a></li>
+				</ul>
+			{% endfor %}
 			</div>
 		</div>
 
 	{% endblock %}
 
-	{% block footer %}{% endblock %}
+{% block footer %}{% endblock %}
 
-	<script type="text/javascript">
-		$(document).on("ready",function(){
-			alert("listo");
-		})
-	</script>
+<script type="text/javascript">
+	$(document).on("ready",function(){
+		alert("listo");
+	})
+</script>
