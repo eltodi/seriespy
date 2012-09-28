@@ -162,13 +162,3 @@ def notificaciones_cambiar(request, value=False):
 	return HttpResponseRedirect(request.META.get("HTTP_REFERER", reverse("series_home")))
 
 
-
-
-
-
-
-
-
-
-
-

@@ -34,6 +34,7 @@
                             <li><a href="{% url auth_logout %}">Logout</a></li>
                         </ul>
                     </li>
+                    <li><button onclick="pruebame()" class="btn">pruebame</button></li>
                     {% else %}
                     <li><a href="{% url auth_login %}?next=/">Login</a></li>
                     {% endif %}
@@ -76,8 +77,14 @@
 {% if request.user.is_authenticated and request.user.get_profile.notificaciones_activas %}
     <script type="text/javascript">
         var url_notificar_descarga_episodios = "{% url series_episodios_descargados_ajax %}";
+        var ut
     </script>
+    <script type="text/javascript">
+        var url_notificar_mensajes = "{% url mensajes_hay_mensajes_pendientes_ajax %}";
+    </script>
+    <script type="text/javascript" src="{{STATIC_URL}}mensajes/js/notificar_mensajes.js"></script>
 {% endif %}
+
 {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from series.models import PerfilUsuario, Genero, Serie, Episodio, EpisodioUsuario, UsuarioSerie, RegistroImportacion, Mensaje
+from series.models import PerfilUsuario, Genero, Serie, Episodio, EpisodioUsuario, UsuarioSerie, RegistroImportacion
+from mensajes.models import Mensaje
 
 class SerieAdmin(admin.ModelAdmin):
     list_filter = ('genero', 'year')
