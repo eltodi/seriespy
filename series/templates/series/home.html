@@ -9,6 +9,19 @@
 		</ul>
 	{% endblock %}
 
+	{% block recomendadas %}
+		<h3>Recomendadas</h3>
+		<ul class="thumbnails">
+		{% for s in oAleatorias %}
+			<li class="span1">
+		    	<a href="{% url series_ver_ficha_serie slug_serie=s.slug %}" class="thumbnail">
+					<img style="width:100%; height: 100px" src="{{s.min_cover}}" alt="">
+				</a>
+		  </li>
+		{% endfor %}
+	</ul>
+	{% endblock %}
+
 	{% block contenido %}
 		<div class="row">
 			<div class="span4 nonstyled">

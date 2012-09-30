@@ -26,8 +26,9 @@ def pruebas(request):
 
 @render_with("series/home.html")
 def home(request):
+	oAleatorias = Serie.objects.filter(min_cover__icontains="http://").order_by("?")[:24]
 	oSeries = Serie.objects.all().order_by("?")[:60]
-	return {"oSeries":oSeries}
+	return {"oSeries":oSeries, "oAleatorias":oAleatorias}
 
 
 @render_with("series/home.html")
