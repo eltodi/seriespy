@@ -4,9 +4,7 @@
 	{{ oSerie.titulo }}:{{ oEpisodio.titulo }}
 {% endblock %}
 
-{% block header %}
-	<h1>{{ oSerie.titulo }} <small>{{ oEpisodio.numero }}.- {{ oEpisodio.titulo }}</small>
-{% endblock %}
+{% block wrapper %}{% endblock %}
 
 {% block guia_paginas %}
 	<ul class="breadcrumb">
@@ -18,11 +16,11 @@
 {% endblock %}
 
 {% block contenido %}
-	<div class="row">
-		<div class="span3">
+	<div class="row-fluid">
+		<div class="span1">
 			<img style="width: 100%" src="{% url series_portada oSerie.slug %}" />
 		</div>
-		<div class="span8">
+		<div style="width: 100%">
 			<h3>{{oEpisodio.numero }}.- {{ oEpisodio.titulo }} <span class="pull-right"><small>RATING: {{ oSerie.rating }}</small></span></h3>
 			<p>{{ oSerie.plot }}</p>
 			<p><a href="{{ oEpisodio.url_magnet }}">
@@ -31,4 +29,5 @@
 			</p>
 
 		</div>
+	</div>
 {% endblock %}

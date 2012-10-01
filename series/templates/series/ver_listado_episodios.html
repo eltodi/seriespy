@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-	{% block title %}{{ oSerie.titulo }}{% endblock %}
-	{% block header %}
-		<h1>{{ oSerie.titulo }}
-		<small>TEMPORADA {{ temporada }}</small></h1>
+	{% block title %}{{oSerie.titulo}} :: TEMPORADA {{temporada}} :: {{ oSerie.titulo }}{% endblock %}
+
+	{% block wrapper %}
 	{% endblock %}
+
 	{% block guia_paginas %}
 		<ul class="breadcrumb">
 			<li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
@@ -12,13 +12,14 @@
 			<li class="active">Temporada {{ temporada }}</li>
 		</ul>
 	{% endblock %}
+
 	{% block contenido %}
-		<div class="row">
-			<div class="span3">
-				<img style="width: 100%" src="{% url series_portada oSerie.slug %}" />
+		<div class="row-fluid">
+			<div style="width: 200px" class="pull-left">
+				<img style="width: 100%" class="pull-left" src="{% url series_portada oSerie.slug %}" />
 			</div>
-			<div class="span8">
-				<h3>LISTADO DE EPISODIOS</h3>
+			<div class="pull-right" style="width: 400px">
+				<h4>Episodios {{oSerie.titulo}}</h4>
 				<ul class="unstyled">
 				{% for ep in oEpisodios %}
 					<li><a href="{% url series_ver_ficha_episodio oSerie.slug, temporada, ep.numero %}">{{ ep|upper }}</a></li>

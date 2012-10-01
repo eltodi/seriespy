@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 	{% block title %}SeriesPY{% endblock %}
+
+    {% block wrapper %}
+    {% for s in oSeries|slice:":1" %}
+
+        <div id="intro">
+            <img src="{{s.cover}}" style="width: 240px; margin-right: 30px" class="pull-right" alt="baner">
+        </div>
+
+        <header class="group_bannner_left">
+            <hgroup>
+                <h1>{{s.titulo}}</h1>
+                <h2>{{s.plot|slice:":120"}}.....</h2>
+            </hgroup>
+            <div class="button black"><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">Ver más información de sobre esta serie</a></div>
+        </header>
+    {% endfor %}
+    {% endblock %}
+
     {% block guia_paginas %}
         <ul class="breadcrumb">
         <li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
@@ -14,13 +32,38 @@
                 <a href="{% url series_ver_ficha_serie slug_serie=s.slug %}" class="thumbnail">
                     <img style="width:100%; height: 100px" src="{{s.min_cover}}" alt="">
                 </a>
-          </li>
+            </li>
         {% endfor %}
-    </ul>
+        </ul>
     {% endblock %}
 
     {% block contenido %}
-    	<h3>Últimas Descargas</h3>
+    	<h3>Más Descargadas</h3>
+        <ul class="thumbnails">
+        {% for s in oSeries %}
+            <li class="span2">
+                <div class="thumbnails">
+                    <a href="{% url series_ver_ficha_serie slug_serie=s.slug %}" class="thumbnail">
+                        <img style="width:85%; height: 210px" src="{{s.min_cover}}" alt="">
+                        <p><span class="badge badge-info">{{s.rating}}</span> {{s.titulo}}</p>
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endblock %}
+
+    {% block twitter %}
+    <h3>Twitter</h3>
+    {% for tw in oTwitter %}
+        <article class="holder_news">
+        <h4>{{tw.user.name}}
+        <span>10.09.2011</span></h4>
+        <p>{{tw.text}}</p>
+        </article>
+    {% endfor %}
+
+
     {% endblock %}
 
 <!--

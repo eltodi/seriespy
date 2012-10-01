@@ -8,7 +8,7 @@
 </head>
 
 <body>
-   <div id="container">
+<div id="container">
     <header>
     <a href="#" id="logo">
         <img src="{{STATIC_URL}}series/images/logo.png" width="221" height="84" alt="logo"/>
@@ -17,13 +17,15 @@
        <ul>
            <li><a href="{% url series_home %}" class="current">Home</a></li>
            <li><a href="#">About us</a></li>
-           <li><a href="#">Services</a></li>
+           <li><a href="#">Servicios</a></li>
            <li><a href="#">Portfolio</a></li>
            <li><a href="#">News</a></li>
            <li><a href="#">Contact</a></li>
        </ul>
    </nav>
    </header>
+
+    {% block wrapper %}
 
     <div id="intro">
         <img src="{{STATIC_URL}}series/images/banner1.png"  alt="baner">
@@ -34,101 +36,68 @@
             <h1>We serve fresh ideas</h1>
             <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
             </h2>
-            </hgroup>
-            <div class="button black"><a href="#">Read more about our fresh ideas</a></div>
+		</hgroup>
+		<div class="button black"><a href="#">Read more about our fresh ideas</a></div>
     </header>
+    {% endblock %}
 
-       <div class="holder_content">
-	<div id="guia_paginas" class="guia_paginas">
-		{% block guia_paginas %}{% endblock %}
-	</div>
 
-	<div class="group1">
-		{% block recomendadas %}
 
-		{% endblock %}
-		{% block contenido %}
-		<h3>Services</h3>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-		Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+	<div class="holder_content">
+		<div id="guia_paginas" class="guia_paginas">
+			{% block guia_paginas %}{% endblock %}
+		</div>
 
-		<article class="holder_gallery">
-		<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture2.jpg" width="150" height="99" alt="picture1"/></a>
-		<h2>Lorem ipsum</h2>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-		Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
-		</p> <span class="readmore"><a href="#">Read more..</a></span>
-		</article>
+		<div class="group1">
+			{% block recomendadas %}
+			{% endblock %}
 
-		<article class="holder_gallery">
-		<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture4.jpg" width="150" height="99" alt="picture1"/></a>
-		<h2>Lorem ipsum</h2>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-		Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
-		</p> <span class="readmore"><a href="#">Read more..</a></span>
-		</article>
+			{% block contenido %}
+				<h3>Services</h3>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
 
-		<article class="holder_gallery">
-		<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture5.jpg" width="150" height="99" alt="picture1"/></a>
-		<h2>Lorem ipsum</h2>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-		Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
-		</p> <span class="readmore"><a href="#">Read more..</a></span>
-		</article>
+				<article class="holder_gallery">
+				<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture2.jpg" width="150" height="99" alt="picture1"/></a>
+				<h2>Lorem ipsum</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
+				</p> <span class="readmore"><a href="#">Read more..</a></span>
+				</article>
+
+				<article class="holder_gallery">
+				<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture4.jpg" width="150" height="99" alt="picture1"/></a>
+				<h2>Lorem ipsum</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
+				</p> <span class="readmore"><a href="#">Read more..</a></span>
+				</article>
+
+				<article class="holder_gallery">
+				<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture5.jpg" width="150" height="99" alt="picture1"/></a>
+				<h2>Lorem ipsum</h2>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
+				</p> <span class="readmore"><a href="#">Read more..</a></span>
+				</article>
+				</section>
+			{% endblock %}
+		</div>
+		<section class="group2">
+			{% block twitter %}
+				<h3>Twitter</h3>
+				<article class="holder_news">
+				<h4>Lorem ipsum
+				<span>10.09.2011</span></h4>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu.<span class="readmore">
+				<a href="#">Read more..</a></span></p>
+				</article>
+			{% endblock %}
 		</section>
-	{% endblock %}
 	</div>
-	<section class="group2">
-		{% block twitter %}
-		<h3>Twitter</h3>
-		<article class="holder_news">
-		<h4>Lorem ipsum
-		<span>10.09.2011</span></h4>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu.<span class="readmore">
-		<a href="#">Read more..</a></span></p>
-		</article>
+</div>
+<br><br>
 
-		<article class="holder_news">
-		<h4>Lorem ipsum
-		<span>20.09.2011</span></h4>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu.
-		<span class="readmore"><a href="#">Read more..</a></span></p>
-		</article>
 
-		<article class="holder_news">
-		<h4>Lorem ipsum
-		<span>27.09.2011</span></h4>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu.
-		<span class="readmore"><a href="#">Read more..</a></span></p>
-		</article>
-		{% endblock %}
-	</section>
-	<div class="clearing"></div>
-
-        <section class="group3">
-            <h3>About us</h3>
-            <a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture1.jpg" width="200" height="97" alt="picture1"/></a>
-
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-            Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.   </p>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.<span class="readmore"> <a href="#">Read more..</a></span>
-            </p>
-
-            <h3>Testimonials</h3>
-            <p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-            Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst." - Lorem ipsum  </p>
-
-            <p>"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-            Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst." - Lorem ipsum  </p>
-        </section>
-       </div>
-   </div>
-
-   <footer>
-       <div class="container">
-       <div id="FooterTwo"> © 2011 Fresh ideas </div>
-       <div id="FooterTree"> Valid html5, css3, design and code by <a href="http://www.marijazaric.com">marija zaric - creative simplicity</a>   </div>
-       </div>
-   </footer>
     </body>
 </html>

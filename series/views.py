@@ -13,6 +13,7 @@ from utils.decorators import render_with, ajax_request
 import requests
 from django.views.decorators.csrf import csrf_exempt
 import pytz
+import twitter
 
 
 def pruebas(request):
@@ -27,8 +28,11 @@ def pruebas(request):
 @render_with("series/home.html")
 def home(request):
 	oAleatorias = Serie.objects.filter(min_cover__icontains="http://").order_by("?")[:24]
-	oSeries = Serie.objects.all().order_by("?")[:60]
-	return {"oSeries":oSeries, "oAleatorias":oAleatorias}
+	oSeries = Serie.objects.filter(min_cover__icontains="http://").order_by("-rating")[:30]
+	api = twitter.Api();
+	oTwitter = api.GetUserTimeline("@django_es")[:5]
+
+	return {"oSeries":oSeries, "oAleatorias":oAleatorias, "oTwitter":oTwitter}
 
 
 @render_with("series/home.html")
