@@ -3,30 +3,29 @@
 {%block title %}{{ obj.titulo }}{% endblock %}
 
 {% block header %}
-	<h1>{{ obj.titulo }}</h1>
+    <h1>{{ obj.titulo }}</h1>
 {% endblock %}
-	{% block guia_paginas %}
-		<ul class="breadcrumb">
-			<li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
-			<li class="active">{{ obj.slug }}<span class="divider">/</span></li>
-		</ul>
-	{% endblock %}
-
+    {% block guia_paginas %}
+        <ul class="breadcrumb">
+            <li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
+            <li class="active">{{ obj.slug }}<span class="divider">/</span></li>
+        </ul>
+    {% endblock %}
+<!--
 {% block contenido %}
-	<div class="row">
-		<div class="span3">
-			<img style="width: 100%" src="{% url series_portada obj.slug %}" />
-		</div>
-		<div class="span8">
-			<p>{{ obj.plot }}</p>
+    <div class="row">
+        <div class="span3">
+            <img style="width: 100%" src="{% url series_portada obj.slug %}" />
+        </div>
+        <div class="span8">
+            <p>{{ obj.plot }}</p>
 
-			<ul class="unstyled">
-			{% for t in oTemporadas %}
-				<li><a href="{% url series_ver_listado_episodios obj.slug, t %}">Temporada {{ t }}</a></li>
-			{% endfor %}
-			</ul>
-		</div>
-	</div>
-
-
+            <ul class="unstyled">
+            {% for t in oTemporadas %}
+                <li><a href="{% url series_ver_listado_episodios obj.slug, t %}">Temporada {{ t }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
+-->

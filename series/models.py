@@ -82,6 +82,7 @@ class RegistroImportacion(models.Model):
 
 
 class Mensaje(models.Model):
+    ###  NO USAR --> MOVIDO A APP MENSAJES ###
     remitente = models.ForeignKey(User, related_name="remitente_mensaje_set")
     destinatario = models.ForeignKey(User, related_name="destinatario_mensaje_set")
     fecha = models.DateTimeField()

@@ -138,6 +138,8 @@ INSTALLED_APPS = (
     "series",
     "south",
     "crispy_forms",
+    "mensajes",
+    "gunicorn",
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,53 +1,65 @@
 {% extends "base.html" %}
-	{% block header %}
-		<h1>SeriesPY</h1>
-	{% endblock %}
+	{% block title %}SeriesPY{% endblock %}
+    {% block guia_paginas %}
+        <ul class="breadcrumb">
+        <li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
+        </ul>
+    {% endblock %}
 
-	{% block guia_paginas %}
-		<ul class="breadcrumb">
-		<li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
-		</ul>
-	{% endblock %}
+    {% block recomendadas %}
+        <h3>Recomendadas</h3>
+        <ul class="thumbnails">
+        {% for s in oAleatorias %}
+            <li class="span1">
+                <a href="{% url series_ver_ficha_serie slug_serie=s.slug %}" class="thumbnail">
+                    <img style="width:100%; height: 100px" src="{{s.min_cover}}" alt="">
+                </a>
+          </li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
 
-	{% block contenido %}
-		<div class="row">
-			<div class="span4 nonstyled">
-				{% for s in oSeries|slice:":20" %}
-				<ul class="unstyled">
-					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
-						{{ s|upper }}
-					</a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
-				</ul>
-				{% endfor %}
-			</div>
+    {% block contenido %}
+    	<h3>Últimas Descargas</h3>
+    {% endblock %}
 
-			<div class="span4 nonstyled">
-			{% for s in oSeries|slice:"20:40" %}
-				<ul class="unstyled">
-					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
-						{{ s|upper }}
-					</a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
-				</ul>
-			{% endfor %}
-			</div>
+<!--
+{% comment %}
+    {% block contenido %}
+        <div class="row">
+            <div class="span4 nonstyled">
+                {% for s in oSeries|slice:":20" %}
+                <ul class="unstyled">
+                    <li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
+                        {{ s|upper }}
+                    </a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
+                </ul>
+                {% endfor %}
+            </div>
 
-			<div class="span4 nonstyled">
-			{% for s in oSeries|slice:"40:" %}
-				<ul class="unstyled">
-					<li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
-						{{ s|upper }}
-					</a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
-				</ul>
-			{% endfor %}
-			</div>
-		</div>
+            <div class="span4 nonstyled">
+            {% for s in oSeries|slice:"20:40" %}
+                <ul class="unstyled">
+                    <li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
+                        {{ s|upper }}
+                    </a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
+                </ul>
+            {% endfor %}
+            </div>
 
-	{% endblock %}
+            <div class="span4 nonstyled">
+            {% for s in oSeries|slice:"40:" %}
+                <ul class="unstyled">
+                    <li><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">
+                        {{ s|upper }}
+                    </a><span class="badge badge-warning">{{ s.episodio_set.count }}</span></li>
+                </ul>
+            {% endfor %}
+            </div>
+        </div>
+
+    {% endblock %}
+{% endcomment %}
+-->
 
 {% block footer %}{% endblock %}
-
-<script type="text/javascript">
-	$(document).on("ready",function(){
-		alert("listo");
-	})
-</script>
