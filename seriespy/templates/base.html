@@ -17,16 +17,23 @@
        <ul>
            <li><a href="{% url series_home %}" class="current">Home</a></li>
            <li><a href="#">About us</a></li>
-           <li><a href="#">Servicios</a></li>
-           <li><a href="#">Portfolio</a></li>
-           <li><a href="#">News</a></li>
-           <li><a href="#">Contact</a></li>
+           <li><a href="{% url series_servicios %}">Servicios</a></li>
+           {% if request.user.is_authenticated %}
+                {% if request.user.get_profile.notificaciones_activas %}
+                    <li><a href="{% url series_notificaciones_desactivar %}">Quitar notificaciones</a></li>
+                    {% else %}
+                    <li><a href="{% url series_notificaciones_activar %}">Activar notificaciones</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    <li><a href="{% url auth_logout %}">Salir</a></li>
+                {% else %}
+                <li><a href="{% url auth_login %}?next=/">Login</a></li>
+            {% endif %}
        </ul>
    </nav>
    </header>
 
     {% block wrapper %}
-
     <div id="intro">
         <img src="{{STATIC_URL}}series/images/banner1.png"  alt="baner">
     </div>
@@ -36,65 +43,69 @@
             <h1>We serve fresh ideas</h1>
             <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
             </h2>
-		</hgroup>
-		<div class="button black"><a href="#">Read more about our fresh ideas</a></div>
+        </hgroup>
+        <div class="button black"><a href="#">Read more about our fresh ideas</a></div>
     </header>
     {% endblock %}
 
+    <div class="holder_content">
+        <div id="guia_paginas" class="guia_paginas">
+            {% block guia_paginas %}{% endblock %}
+        </div>
 
+        {% if request.user.is_authenticated %}
+            <div class="nav">
+                    {% block menu_admin %}{% endblock %}
+            </div>
+        {% endif %}
 
-	<div class="holder_content">
-		<div id="guia_paginas" class="guia_paginas">
-			{% block guia_paginas %}{% endblock %}
-		</div>
+        <div class="group1">
+            {% block recomendadas %}
+            {% endblock %}
 
-		<div class="group1">
-			{% block recomendadas %}
-			{% endblock %}
+            {% block contenido %}
+                <h3>Services</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+                Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
 
-			{% block contenido %}
-				<h3>Services</h3>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+                <article class="holder_gallery">
+                <a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture2.jpg" width="150" height="99" alt="picture1"/></a>
+                <h2>Lorem ipsum</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+                Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
+                </p> <span class="readmore"><a href="#">Read more..</a></span>
+                </article>
 
-				<article class="holder_gallery">
-				<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture2.jpg" width="150" height="99" alt="picture1"/></a>
-				<h2>Lorem ipsum</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
-				</p> <span class="readmore"><a href="#">Read more..</a></span>
-				</article>
+                <article class="holder_gallery">
+                <a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture4.jpg" width="150" height="99" alt="picture1"/></a>
+                <h2>Lorem ipsum</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+                Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
+                </p> <span class="readmore"><a href="#">Read more..</a></span>
+                </article>
 
-				<article class="holder_gallery">
-				<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture4.jpg" width="150" height="99" alt="picture1"/></a>
-				<h2>Lorem ipsum</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
-				</p> <span class="readmore"><a href="#">Read more..</a></span>
-				</article>
-
-				<article class="holder_gallery">
-				<a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture5.jpg" width="150" height="99" alt="picture1"/></a>
-				<h2>Lorem ipsum</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
-				Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
-				</p> <span class="readmore"><a href="#">Read more..</a></span>
-				</article>
-				</section>
-			{% endblock %}
-		</div>
-		<section class="group2">
-			{% block twitter %}
-				<h3>Twitter</h3>
-				<article class="holder_news">
-				<h4>Lorem ipsum
-				<span>10.09.2011</span></h4>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu.<span class="readmore">
-				<a href="#">Read more..</a></span></p>
-				</article>
-			{% endblock %}
-		</section>
-	</div>
+                <article class="holder_gallery">
+                <a class="photo_hover2" href="#"><img src="{{STATIC_URL}}series/images/picture5.jpg" width="150" height="99" alt="picture1"/></a>
+                <h2>Lorem ipsum</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.
+                Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst.
+                </p> <span class="readmore"><a href="#">Read more..</a></span>
+                </article>
+                </section>
+            {% endblock %}
+        </div>
+        <section class="group2">
+            {% block twitter %}
+                <h3>Twitter</h3>
+                <article class="holder_news">
+                <h4>Lorem ipsum
+                <span>10.09.2011</span></h4>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu.<span class="readmore">
+                <a href="#">Read more..</a></span></p>
+                </article>
+            {% endblock %}
+        </section>
+    </div>
 </div>
 <br><br>
 

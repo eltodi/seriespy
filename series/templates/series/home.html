@@ -3,7 +3,6 @@
 
     {% block wrapper %}
     {% for s in oSeries|slice:":1" %}
-
         <div id="intro">
             <img src="{{s.cover}}" style="width: 240px; margin-right: 30px" class="pull-right" alt="baner">
         </div>
@@ -23,6 +22,11 @@
         <li><a href="{% url series_home %}">Home</a> <span class="divider">/</span></li>
         </ul>
     {% endblock %}
+
+    {% block menu_admin %}
+            <a href="{% url series_serie_nueva %}" class="btn btn-primary">Nueva Serie</a>
+    {% endblock %}
+
 
     {% block recomendadas %}
         <h3>Recomendadas</h3>
@@ -54,16 +58,14 @@
     {% endblock %}
 
     {% block twitter %}
-    <h3>Twitter</h3>
-    {% for tw in oTwitter %}
-        <article class="holder_news">
-        <h4>{{tw.user.name}}
-        <span>10.09.2011</span></h4>
-        <p>{{tw.text}}</p>
-        </article>
-    {% endfor %}
-
-
+        <h3>Twitter</h3>
+        {% for tw in oTwitter %}
+            <article class="holder_news">
+            <h4>{{tw.user.name}}
+            <span>10.09.2011</span></h4>
+            <p>{{tw.text}}</p>
+            </article>
+        {% endfor %}
     {% endblock %}
 
 <!--

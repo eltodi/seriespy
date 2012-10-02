@@ -14,6 +14,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
 	url(r'^$', 'series.views.home', name='series_home'),
     url(r'^pruebas/$', 'series.views.pruebas'),
+    url(r'^servicios/$', 'series.views.servicios', name="series_servicios"),
     url(r'^nueva/','series.views.serie_nueva', name='series_serie_nueva'),
 
     url(r'^notificaciones/descargas/$', 'series.views.episodios_descargados_ajax', name='series_episodios_descargados_ajax'),

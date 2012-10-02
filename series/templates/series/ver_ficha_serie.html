@@ -15,6 +15,13 @@
     </ul>
 {% endblock %}
 
+    {% block menu_admin %}
+            <a href="{% url series_episodio_nuevo obj.slug %}" class="btn btn-primary">Nuevo Episodio</a>
+            <a href="{% url series_serie_nueva %}" class="btn btn-warning">Editar Serie</a>
+            <a href="{% url series_serie_nueva %}" class="btn btn-danger">Eliminar Serie</a>
+
+    {% endblock %}
+
 {% block contenido %}
     <div class="container-fluid">
         <img style="width: 150px; padding-right: 15px" class="pull-left" src="{% url series_portada obj.slug %}" />
