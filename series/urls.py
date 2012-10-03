@@ -12,8 +12,9 @@ from django.conf.urls import patterns, include, url
 '''
 
 urlpatterns = patterns('',
-	url(r'^$', 'series.views.home', name='series_home'),
-    url(r'^pruebas/$', 'series.views.pruebas'),
+    url(r'^$', 'series.views.home', name='series_home'),
+    url(r'^pruebas/$', 'series.views.pruebas'),    url(r'^(?P<slug_serie>[^/]+)/nuevo/$', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
+
     url(r'^servicios/$', 'series.views.servicios', name="series_servicios"),
     url(r'^nueva/','series.views.serie_nueva', name='series_serie_nueva'),
 
@@ -27,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^(?P<slug_serie>[^/]+)/portada/$', 'series.views.portada', name='series_portada'),
     url(r'^search/$', 'series.views.search', name='series_search'),
     url(r'^(?P<slug_serie>[^/]+)/nuevo/$', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
+    url(r'^(?P<slug_serie>[^/]+)/editar/$', 'series.views.serie_editar', name='series_serie_editar'),
     url(r'^(?P<slug_serie>[^/]+)/$', 'series.views.ver_ficha_serie', name='series_ver_ficha_serie'),
     url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/$', 'series.views.ver_listado_episodios', name='series_ver_listado_episodios'),
     url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/(?P<num_episodio>\d+)/$', 'series.views.ver_ficha_episodio', name='series_ver_ficha_episodio'),

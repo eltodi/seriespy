@@ -90,6 +90,7 @@ def ver_ficha_episodio(request, slug_serie, temporada, num_episodio):
 
 @login_required
 def serie_nueva(request):
+
     if request.method == "POST":
         # UTILIZANDO formulario creado a mano
         '''
@@ -116,6 +117,23 @@ def serie_nueva(request):
         form = SerieForm3()
 
     return render_to_response("series/serie_nueva.html", {"form": form,}, context_instance=RequestContext(request))
+
+
+@login_required
+def serie_editar(request, slug_serie):
+
+    if request.method == "POST":
+        form = SerieEditar(request.POST)
+        if form.is_valid():
+            ed_serie = form.save()
+            ed_serie.save()
+
+            return HttpResponseRedirect(reverse("series_ver_ficha_serie", args=[slug_serie]))
+
+    else:
+        form = SerieEditar(instance=Serie.objects.get(slug=slug_serie))
+
+    return render_to_response("series/editar_serie.html", {"form": form,}, context_instance=RequestContext(request))
 
 
 def portada(request, slug_serie):
@@ -173,5 +191,3 @@ def notificaciones_cambiar(request, value=False):
 
     #raise Http404
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", reverse("series_home")))
-
-
