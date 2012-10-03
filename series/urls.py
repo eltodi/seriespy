@@ -29,6 +29,8 @@ urlpatterns = patterns('',
     url(r'^search/$', 'series.views.search', name='series_search'),
     url(r'^(?P<slug_serie>[^/]+)/nuevo/$', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
     url(r'^(?P<slug_serie>[^/]+)/editar/$', 'series.views.serie_editar', name='series_serie_editar'),
+    url(r'^(?P<slug_serie>[^/]+)/eliminar/$', 'series.views.serie_eliminar', name='series_serie_eliminar'),
+
     url(r'^(?P<slug_serie>[^/]+)/$', 'series.views.ver_ficha_serie', name='series_ver_ficha_serie'),
     url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/$', 'series.views.ver_listado_episodios', name='series_ver_listado_episodios'),
     url(r'^(?P<slug_serie>[^/]+)/(?P<temporada>\d+)/(?P<num_episodio>\d+)/$', 'series.views.ver_ficha_episodio', name='series_ver_ficha_episodio'),

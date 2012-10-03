@@ -121,19 +121,27 @@ def serie_nueva(request):
 
 @login_required
 def serie_editar(request, slug_serie):
+    serie = Serie.objects.get(slug = slug_serie)
 
     if request.method == "POST":
-        form = SerieEditar(request.POST)
+        form = SerieEditar(request.POST, instance=serie)
         if form.is_valid():
             ed_serie = form.save()
-            ed_serie.save()
 
             return HttpResponseRedirect(reverse("series_ver_ficha_serie", args=[slug_serie]))
 
     else:
-        form = SerieEditar(instance=Serie.objects.get(slug=slug_serie))
+        form = SerieEditar(instance = serie)
 
     return render_to_response("series/editar_serie.html", {"form": form,}, context_instance=RequestContext(request))
+
+@login_required
+@csrf_exempt
+def serie_eliminar(request, slug_serie):
+    serie = Serie.objects.get(slug=slug_serie)
+    serie.delete()
+
+    return HttpResponse("1")
 
 
 def portada(request, slug_serie):

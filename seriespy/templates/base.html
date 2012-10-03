@@ -5,6 +5,25 @@
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}series/css/styles.css">
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}/bootstrap/js/jquery.bootstrap-growl.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}series/js/funciones.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}series/js/notificar_descarga.js"></script>
+    {% if request.user.is_authenticated and request.user.get_profile.notificaciones_activas %}
+        <script type="text/javascript">
+            var url_notificar_descarga_episodios = "{% url series_episodios_descargados_ajax %}";
+            var ut
+        </script>
+        <script type="text/javascript">
+            var url_notificar_mensajes = "{% url mensajes_hay_mensajes_pendientes_ajax %}";
+        </script>
+        <script type="text/javascript" src="{{STATIC_URL}}mensajes/js/notificar_mensajes.js"></script>
+    {% endif %}
+
+    {% block extra_js %}{% endblock %}
+
 </head>
 
 <body>
@@ -108,7 +127,11 @@
     </div>
 </div>
 <br><br>
-
+<div id="cp_modal" class="modal hide fade in">
+    <div class="modal-header"></div>
+    <div class="modal-body"></div>
+    <div class="modal-footer"></div>
+</div>
 
     </body>
 </html>
