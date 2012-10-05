@@ -18,7 +18,7 @@
     {% block menu_admin %}
             <a href="{% url series_episodio_nuevo obj.slug %}" class="btn btn-primary">Nuevo Episodio</a>
             <a href="{% url series_serie_editar obj.slug %}" class="btn btn-warning">Editar Serie</a>
-            <a href="{% url series_serie_nueva %}" class="btn btn-danger">Eliminar Serie</a>
+            <a onclick="eliminarSerie('{{obj.titulo}}')" class="btn btn-danger">Eliminar Serie</a>
 
     {% endblock %}
 
@@ -36,4 +36,5 @@
             <li><a href="{% url series_ver_listado_episodios obj.slug, t %}">TEMPORADA {{ t }}</a></li>
         {% endfor %}
     </ul>
+    <input readonly="readonly" disabled="disabled" type="hidden" id="inp_slug_serie" value={{obj.slug}} />
 {% endblock %}
