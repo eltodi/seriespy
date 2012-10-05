@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^$', 'series.views.home', name='series_home'),
     url(r'^pruebas/$', 'series.views.pruebas'),    url(r'^(?P<slug_serie>[^/]+)/nuevo/$', 'series.views.episodio_nuevo', name='series_episodio_nuevo'),
 
-    url(r'^servicios/$', 'series.views.servicios', name="series_servicios"),
+    url(r'^acerca/$', 'series.views.servicios', name="series_servicios"),
     url(r'^nueva/','series.views.serie_nueva', name='series_serie_nueva'),
 
     url(r'^notificaciones/descargas/$', 'series.views.episodios_descargados_ajax', name='series_episodios_descargados_ajax'),

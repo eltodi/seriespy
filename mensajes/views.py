@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from mensajes.forms import MensajeForm
 from mensajes.models import Mensaje
+from series.models import Serie
 from utils.decorators import render_with, ajax_request
 
 
@@ -38,9 +39,10 @@ def enviar_mensaje(request):
             mensaje.save()
             return HttpResponseRedirect(reverse('home'))
     else:
+        oSerie = Serie.objects.all().order_by('-rating')[:1]
         form = MensajeForm()
 
-    return {'form': form}
+    return {'form': form, 'oSeries':oSerie}
 
 @csrf_exempt
 def pruebame(request):

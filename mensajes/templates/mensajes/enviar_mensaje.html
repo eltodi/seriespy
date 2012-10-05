@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
+{% block wrapper %}
+    {% for s in oSeries|slice:":1" %}
+        <div id="intro">
+            <img src="{{s.cover}}" style="width: 240px; margin-right: 30px" class="pull-right" alt="baner">
+        </div>
+
+        <header class="group_bannner_left">
+            <hgroup>
+                <h1>{{s.titulo}}</h1>
+                <h2>{{s.plot|slice:":120"}}.....</h2>
+            </hgroup>
+            <div class="button black"><a href="{% url series_ver_ficha_serie slug_serie=s.slug %}">Ver más información de sobre esta serie</a></div>
+        </header>
+    {% endfor %}
+    {% endblock %}
+
 {% block contenido %}
 
 {% load crispy_forms_tags %}

@@ -9,12 +9,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', RedirectView.as_view(url='/series/', permanent=False), name='home'),
-    url(r'^series/', include('series.urls')),
-    url(r'^mensajes/', include('mensajes.urls')),
+	url(r'^$', RedirectView.as_view(url='/series/', permanent=False), name='home'),
+	url(r'^series/', include('series.urls')),
+	url(r'^mensajes/', include('mensajes.urls')),
 
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='auth_login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='auth_logout'),
+	url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='auth_login'),
+	url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='auth_logout'),
 
 	url(r'^admin/', include(admin.site.urls)),
 

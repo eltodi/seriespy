@@ -35,9 +35,10 @@
    <nav>
        <ul>
            <li><a href="{% url series_home %}" class="current">Home</a></li>
-           <li><a href="#">About us</a></li>
-           <li><a href="{% url series_servicios %}">Servicios</a></li>
+           <li><a href="{% url series_servicios %}">Acerca de</a></li>
            {% if request.user.is_authenticated %}
+                <li><a href="{% url mensajes_enviar_mensaje %}">Mensajería</a></li>
+
                 {% if request.user.get_profile.notificaciones_activas %}
                     <li><a href="{% url series_notificaciones_desactivar %}">Quitar notificaciones</a></li>
                     {% else %}
